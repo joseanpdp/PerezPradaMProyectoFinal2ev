@@ -1,0 +1,28 @@
+Público
+
+  Registro y entrada
+	- Registro (público)
+	- Login (público)
+	
+  Datos de usuario
+  
+	- Buscar usuario por username (público) *
+	
+  Publicaciones
+  
+	- Obtener todas las publicaciones de un usuario (público)
+
+Protegido
+  
+  Usuarios
+  
+	- Editar descripción (privado)
+	- Obtener todos los usuarios que sigue un usuario (privado)
+	- Obtener todos los usuarios que siguen a un usuario (privado)
+	
+	- Obtener todas las publicaciones (privado)
+	- Obtener todas las publicaciones de los usuarios que sigues (privado)
+
+	- Insertar publicación (privado)
+	- Editar publicación (privado)
+	- Borrar publicación (privado)

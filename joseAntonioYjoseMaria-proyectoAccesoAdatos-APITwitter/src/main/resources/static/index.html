@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			pre {
+				  border: 2px solid black;
+				  margin: 1%;
+				  padding: 2%;
+          font-size:0.8em;
+			}
+		</style>
+	</head>
+	<body>
+    <h1>Probando Twitta REST</h1>
+		<div></div>
+		<script>
+const output = document.querySelector("div");
+
+async function getAll(mensaje) {
+	  output.innerHTML += "<p>" + mensaje + "</p>";
+    const response = await fetch("/api/user");
+    const json = await response.json();
+    output.innerHTML += "<pre>" + JSON.stringify(json, null, 4) + "</pre>";	
+}
+
+async function getUserById(mensaje, id) {
+	  output.innerHTML += "<p>" + mensaje + ":" + id +"</p>";
+    const response = await fetch("/api/user/" + id);
+    const json = await response.json();
+	  output.innerHTML += "<pre>" + JSON.stringify(json, null, 4) + "</pre>";	
+}
+
+async function postUser(mensaje, nombre) {
+	  output.innerHTML += "<p>" + mensaje + ":" + nombre + "</p>";
+	  const fetchConfig = {method: "POST", headers: {"Content-Type":"application/json"}, body: '{"userName":"'+ nombre +'"}'};
+    const response = await fetch("/api/user", fetchConfig);
+}
+
+async function deleteUserById(mensaje, id) {
+	  output.innerHTML += "<p>" + mensaje + ":" + id + "</p>";
+    const fetchConfig = {method: "DELETE"};
+	  const response = await fetch("/api/user/" + id, fetchConfig);
+}
+
+async function main() {
+   try {
+       await getAll("Datos iniciales");
+       await getUserById("Buscando el usuario con el ID","2");
+       await postUser("Creando un nuevo usuario", "Spiderman");
+       await getAll("Datos actualizados");
+       await deleteUserById("Borrando el usuario con ID","1");
+       await getAll("Datos finales");
+   }
+   catch(e) {
+       alert(e);
+   }
+}
+
+main();
+		</script>
+	</body>
+</html>

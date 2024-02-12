@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+      body {
+          font-size:8px;
+      }
+			pre {
+				  border: 2px solid black;
+				  margin: 1%;
+				  padding: 2%;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<script>
+const output = document.querySelector("div");
+
+async function getAll(mensaje) {
+	output.innerHTML += "<p>" + mensaje + "</p>";
+  try {
+	  const response = await fetch("/api/user");
+    if (!response.ok) throw new Error( "response:" +response.status + " " + response.statusText); 
+	  const json = await response.json();
+	  output.innerHTML += "<pre>" + JSON.stringify(json, null, 4) + "</pre>";	
+  }
+  catch(e) {
+    output.innerHTML += "<p>Algo ha fallado en getAll:" + e + "</p>";
+  }
+}
+
+async function getUserById(mensaje, id) {
+	output.innerHTML += "<p>" + mensaje + ":" + id +"</p>";
+  try {
+	  const response = await fetch("/api/user/" + id);
+    if (!response.ok) throw new Error( "response:" +response.status + " " + response.statusText); 
+	  const json = await response.json();
+	  output.innerHTML += "<pre>" + JSON.stringify(json, null, 4) + "</pre>";	
+  }
+  catch(e) {
+    output.innerHTML += "<p>Algo ha fallado en getUserById:" + e + "</p>";
+  }
+}
+
+async function postUser(mensaje) {
+	output.innerHTML += "<p>" + mensaje + "</p>";
+	const fetchConfig = {method: "POST", headers: {"Content-Type":"application/json"}, body: '{"userName":"Paco"}'};
+  try {
+	  const response = await fetch("/api/user", fetchConfig);
+    if (!response.ok) throw new Error( "response:" +response.status + " " + response.statusText); 
+  }
+  catch(e) {
+    output.innerHTML += "<p>Algo ha fallado en post:" + e + "</p>";
+  }
+}
+
+async function deleteUserById(mensaje, id) {
+	output.innerHTML += "<p>" + mensaje + "</p>";
+  try {
+	  const fetchConfig = {method: "DELETE"};
+	  const response = await fetch("/api/user/" + id, fetchConfig);
+    if (!response.ok) throw new Error( "response:" +response.status + " " + response.statusText); 
+	  const json = await response.json();
+	  output.innerHTML += "<pre>" + JSON.stringify(json, null, 4) + "</pre>";
+  }
+  catch(e) {
+    output.innerHTML += "<p>Algo ha fallado en delete:" + e + "</p>";
+  }
+}
+
+async function main() {
+   try {
+     await getAll("Datos iniciales");
+     await getUserById("Buscando el usuario con el ID","2");
+     await postUser("Creando un nuevo usuario");
+     await getAll("Datos actualizados");
+     await deleteUserById("Borrando el usuario con ID","1");
+     await getAll("Datos finales");
+   }
+   catch(e) {
+     alert(e);
+   }
+}
+
+main();
+		</script>
+	</body>
+</html>
