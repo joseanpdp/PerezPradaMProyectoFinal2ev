@@ -58,8 +58,8 @@ public class PublicationService {
 		}
 	}
 
-	public void update(PublicationPutDto publicationPutDto) {
-		Long id = publicationPutDto.getId();
+	public void update(long id, PublicationPutDto publicationPutDto) {
+		// Long id = publicationPutDto.getId();
 		Optional<Publication> optionalPublication = publicationRepository.findById(id);
 		if ( optionalPublication.isPresent() ) {
 			Publication publication = optionalPublication.get();

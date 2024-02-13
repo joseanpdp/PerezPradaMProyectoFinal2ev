@@ -12,12 +12,22 @@ import com.vedruna.proyectoFinal.model.Publication;
 
 import java.util.List;
 
+/**
+ * Adaptador personalizado para mostrar publicaciones en una lista.
+ */
 public class PublicationsAdapter extends BaseAdapter {
     List<Publication> publicationList;
 
     Context context;
     TextView text;
+    TextView date;
+    TextView post;
 
+    /**
+     * Constructor del adaptador.
+     * @param publicationList La lista de publicaciones a mostrar.
+     * @param context El contexto de la aplicación.
+     */
     public PublicationsAdapter(List<Publication> publicationList, Context context) {
         this.publicationList = publicationList;
         this.context = context;
@@ -43,8 +53,12 @@ public class PublicationsAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.publication_list, parent, false);
         }
-        text = convertView.findViewById(R.id.publicationText);
+        text = convertView.findViewById(R.id.postText);
         text.setText(publicationList.get(position).getText());
+        date = convertView.findViewById(R.id.datePost);
+        date.setText(publicationList.get(position).getCreationDate());
+        post = convertView.findViewById(R.id.postId);
+        post.setText(publicationList.get(position).getId() + "");
         return convertView;
     }
 }

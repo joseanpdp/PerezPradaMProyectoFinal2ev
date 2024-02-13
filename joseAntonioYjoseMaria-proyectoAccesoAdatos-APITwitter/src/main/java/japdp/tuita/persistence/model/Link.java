@@ -27,15 +27,7 @@ public class Link {
     @ManyToOne
     @JoinColumn(name = "followed")
 	private User followed;
-    
-    /* En principio era OneToOne pero
-     * en este caso Hibernate añadía automaticamente
-     * una restricción unique
-     * alter table links add constraint UK_5pk8vt2iqrhpgnfnlhoa3kujo unique (follower);
-     * 
-     * Un problema similar se comenta aqui:
-     * https://stackoverflow.com/questions/69310731/hibernate-adds-unwanted-unique-key-itself-in-onetomany-mapping
-     */
+
     @ManyToOne
     @JoinColumn(name = "follower")
     private User follower;

@@ -22,18 +22,19 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/*
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+/**
+ * MainActivity sirve como el punto de entrada de la aplicación.
+ * Administra la navegación y muestra diferentes fragmentos según la interacción del usuario.
  */
-
 public class MainActivity extends AppCompatActivity {
 
     private TextView textViewBienvenida;
 
+    /**
+     * El método onCreate se llama cuando la actividad está comenzando.
+     * Inicializa el diseño de la actividad y configura la navegación inferior.
+     * @param savedInstanceState Un Bundle que contiene el estado previamente guardado de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +64,4 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
-
-
 }

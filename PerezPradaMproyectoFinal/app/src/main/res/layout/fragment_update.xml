@@ -9,8 +9,46 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <EditText
+        android:id="@+id/editionDatePut"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Fecha de edición"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFC107"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.73" />
+
+    <EditText
+        android:id="@+id/textPut"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Texto del post"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFC107"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
     <Button
-        android:id="@+id/update"
+        android:id="@+id/buttonUpdate"
         android:layout_width="130dp"
         android:layout_height="51dp"
         android:backgroundTint="#FFC107"
@@ -23,12 +61,12 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.842"
+        app:layout_constraintVertical_bias="0.872"
         tools:cornerRadius="100dp"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/idPost2"
+        android:id="@+id/idPut"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:hint="Id del post"
@@ -41,24 +79,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.379"
         tools:textSize="20sp" />
-
-    <Button
-        android:id="@+id/delete2"
-        android:layout_width="130dp"
-        android:layout_height="51dp"
-        android:backgroundTint="#FFC107"
-        android:text="SEARCH"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:iconTint="#009688"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.476"
-        tools:cornerRadius="100dp"
-        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView3"
@@ -76,21 +96,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="341dp"
-        android:layout_height="68dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Introduce el ID del post que quieres editar"
-        android:textAlignment="center"
-        android:textColor="#03A9F4"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271" />
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="70dp"
@@ -104,12 +109,12 @@
         app:layout_constraintVertical_bias="0.024" />
 
     <EditText
-        android:id="@+id/textPost"
+        android:id="@+id/creationDatePut"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Texto del post"
+        android:hint="Fecha de creación"
         android:inputType="textMultiLine"
         android:maxLines="3"
         android:textColor="#FFFFFF"
@@ -120,6 +125,6 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.711" />
+        app:layout_constraintVertical_bias="0.616" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,13 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.vedruna.perezpradamproyectofinal.R;
 import com.vedruna.proyectoFinal.interfaces.CRUDInterface;
 import com.vedruna.proyectoFinal.model.Publication;
-
-import java.util.List;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,61 +22,93 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UpdateFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class UpdateFragment extends Fragment {
 
-
-    List<Publication> products;
-    CRUDInterface crudInterface;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private CRUDInterface crudInterface;
+    private Button buttonUpdate;
+    private EditText idPut;
+    private EditText textPut;
+    private EditText creationDatePut;
+    private EditText editionDatePut;
 
     public UpdateFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ApiFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UpdateFragment newInstance(String param1, String param2) {
-        UpdateFragment fragment = new UpdateFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        // Constructor público vacío requerido
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update, container, false);
+        View view = inflater.inflate(R.layout.fragment_update, container, false);
+
+        idPut = view.findViewById(R.id.idPut);
+        textPut = view.findViewById(R.id.textPut);
+        creationDatePut = view.findViewById(R.id.creationDatePut);
+        editionDatePut = view.findViewById(R.id.editionDatePut);
+
+        setupUpdateButton(view);
+
+        return view;
+    }
+
+    /**
+     * Configura el botón de actualización.
+     * @param view La vista en la que se encuentra el botón.
+     */
+    private void setupUpdateButton(View view) {
+        buttonUpdate = view.findViewById(R.id.buttonUpdate);
+
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String idString = idPut.getText().toString().trim();
+                String textString = textPut.getText().toString().trim();
+                String creationDateString = creationDatePut.getText().toString().trim();
+                String editionDateString = editionDatePut.getText().toString().trim();
+
+                if (!idString.isEmpty() && !textString.isEmpty() && !creationDateString.isEmpty() && !editionDateString.isEmpty()) {
+                    long id = Long.parseLong(idString);
+                    Publication editedPublication = new Publication(id, textString, creationDateString, editionDateString);
+                    updatePost(id, editedPublication);
+                } else {
+                    Toast.makeText(getContext(), "Error al editar la publicación", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    /**
+     * Actualiza la publicación en el servidor.
+     * @param id El ID de la publicación a actualizar.
+     * @param editedPublication La publicación actualizada.
+     */
+    public void updatePost(long id, Publication editedPublication) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.65:8080/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        crudInterface = retrofit.create(CRUDInterface.class);
+        Call<Publication> call = crudInterface.update(id, editedPublication);
+        call.enqueue(new Callback<Publication>() {
+            @Override
+            public void onResponse(Call<Publication> call, Response<Publication> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getContext(), "Publicación modificada con éxito", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e("Response err", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Publication> call, Throwable t) {
+                Log.e("Throw err:", t.getMessage());
+                Toast.makeText(getContext(), "Error al actualizar la publicación", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

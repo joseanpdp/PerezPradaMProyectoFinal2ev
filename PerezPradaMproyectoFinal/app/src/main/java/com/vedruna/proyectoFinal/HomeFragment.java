@@ -25,13 +25,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
-    List<Publication> publications;
-    CRUDInterface crudInterface;
+    private List<Publication> publications;
+    private CRUDInterface crudInterface;
 
-    ListView publicationListView;
+    private ListView publicationListView;
 
     public HomeFragment() {
-        // Required empty public constructor
+        // Constructor público vacío requerido
     }
 
     @Override
@@ -48,17 +48,21 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Método para obtener todas las publicaciones desde el servidor.
+     * Utiliza Retrofit para hacer una llamada de red para recuperar los datos de las publicaciones.
+     */
     private void getAll() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.1.65:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         crudInterface = retrofit.create(CRUDInterface.class);
-        Call<List<Publication>> call = crudInterface.getAll();
+        Call<List<Publication>> call = crudInterface.getAllPublications();
         call.enqueue(new Callback<List<Publication>>() {
             @Override
             public void onResponse(Call<List<Publication>> call, Response<List<Publication>> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     Log.e("Response err: ", response.message());
                     return;
                 }

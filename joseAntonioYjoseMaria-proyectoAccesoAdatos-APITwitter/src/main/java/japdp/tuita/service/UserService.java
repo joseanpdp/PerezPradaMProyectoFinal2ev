@@ -57,9 +57,6 @@ public class UserService {
 		Optional<User> optionalUser = userRepository.findById(id);
 		if ( optionalUser.isPresent() ) {
 			User user = optionalUser.get();
-			// En esta versión los atributos únicos no podrán ser actualizados
-			// user.setUsername(userDTO.getUsername());
-			// user.setEmail(userDTO.getEmail());
 	        user.setPassword(userPutDto.getPassword());
 	        user.setDescription(userPutDto.getDescription());
 	        user.setCreationDate(userPutDto.getCreationDate());				
@@ -102,27 +99,6 @@ public class UserService {
 	public List<PublicationGetDto> findFollowedPeoplePublicationsById(Long id) {
 		return userRepository.findFollowedPeoplePublicationsGetDtoById(id);
 	}
-	
-/*
-	public List<PublicationGetDto> findPublicationsById(Long id) {
-		List<Publication> publications = userRepository.findPublicationsByUserId(id);
-		List<PublicationGetDto> publicationDTOs = new ArrayList<>();
-		for (Publication publication : publications) {
-			publicationDTOs.add(new PublicationGetResponseDto(publication));
-		}
-		return publicationDTOs;
-	}
-
-	public List<PublicationGetto> findFollowedPeoplePublicationsById(Long id) {
-		List<Publication> publications = userRepository.findFollowedPeoplePublicationsById(id);
-		List<PublicationGetDto> publicationDTOs = new ArrayList<>();
-		for (Publication publication : publications) {
-			publicationDTOs.add(new PublicationGetResponseDto(publication));
-		}
-		return publicationDTOs;
-	}
-
-*/
 
 
 }

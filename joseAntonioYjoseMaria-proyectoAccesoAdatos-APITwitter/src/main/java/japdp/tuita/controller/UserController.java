@@ -30,13 +30,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/")
+	@GetMapping
     @ResponseStatus(code = HttpStatus.OK)
 	public List<UserGetDto> findAll() {
 		return userService.findAll();
 	}
 
-	/** CRUD **/ 
     
 	@GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
@@ -61,16 +60,14 @@ public class UserController {
     public void update(@RequestBody UserPutDto userPutDto) {
         userService.update(userPutDto);
     }
-    
-    /** Get by user name**/
+
     
 	@GetMapping("/username/{username}")
     @ResponseStatus(code = HttpStatus.OK)
 	public UserGetDto findByUserName(@PathVariable String username) {
 		return userService.findByUsername(username);
 	}
-	
-	/** Get people who follow the user [PROTECTED]**/
+
 
 	@GetMapping("/{id}/followerpeople")
     @ResponseStatus(code = HttpStatus.OK)
@@ -78,15 +75,12 @@ public class UserController {
 		return userService.findFollowerPeopleById(id);
 	}
 
-	/** Get people the user follows [PROTECTED]**/
 
 	@GetMapping("/{id}/followedpeople")
     @ResponseStatus(code = HttpStatus.OK)
 	public List<UserGetDto> findFollowedPeopleById(@PathVariable Long id) {
 		return userService.findFollowedPeopleById(id);
 	}
-
-	/** Modify description (privado) [PROTECTED]**/
 	
 	@PatchMapping("/{id}/description/{description}")
     @ResponseStatus(code = HttpStatus.OK)

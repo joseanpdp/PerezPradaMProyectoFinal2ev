@@ -50,10 +50,10 @@ public class PublicationController {
         publicationService.insert(publicationPostDto);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public void update(@RequestBody PublicationPutDto publicationPutDto) {
-        publicationService.update(publicationPutDto);
+    public void update(@PathVariable long id, @RequestBody PublicationPutDto publicationPutDto) {
+        publicationService.update(id, publicationPutDto);
     }
     
 	/** Get all **/ 

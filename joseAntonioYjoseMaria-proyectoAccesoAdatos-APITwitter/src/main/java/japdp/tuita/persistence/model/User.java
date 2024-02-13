@@ -24,43 +24,43 @@ import lombok.Setter;
 @Table(name = "users")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "username", unique=true)
-	private String username;
+    @Column(name = "username", unique = true)
+    private String username;
 
-	@Column(name = "password")
-	private String password;
-	
-	@Column(name = "email", unique=true)
-	private String email;
-	
-	@Column(name = "description")
-	private String description;
+    @Column(name = "password")
+    private String password;
 
-	@Column(name = "creationDate")
-	private String creationDate;
+    @Column(name = "email", unique = true)
+    private String email;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Publication> publications;
+    @Column(name = "description")
+    private String description;
 
-	@OneToMany(mappedBy = "followed")
-	private List<Link> links;
+    @Column(name = "creationDate")
+    private String creationDate;
 
-	public User(String username, String email, String password, String description, String creationDate) {
-		this.username     = username;
-		this.email        = email;
-		this.password     = password;
-		this.description  = description;
-		this.creationDate = creationDate;
-		this.publications = new ArrayList<>();
-		this.links   = new ArrayList<>();
-	}
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Publication> publications;
 
-	public void addPublication(Publication publication) {
-		publications.add(publication);
-	}
+    @OneToMany(mappedBy = "followed")
+    private List<Link> links;
+
+    public User(String username, String email, String password, String description, String creationDate) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.publications = new ArrayList<>();
+        this.links = new ArrayList<>();
+    }
+
+    public void addPublication(Publication publication) {
+        publications.add(publication);
+    }
 
 }
