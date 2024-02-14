@@ -8,7 +8,7 @@
     tools:context=".AddFragment">
 
     <Button
-        android:id="@+id/post"
+        android:id="@+id/buttonCreate"
         android:layout_width="150dp"
         android:layout_height="51dp"
         android:backgroundTint="#FFC107"
@@ -26,7 +26,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/textPost2"
+        android:id="@+id/textCreate"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:ems="10"

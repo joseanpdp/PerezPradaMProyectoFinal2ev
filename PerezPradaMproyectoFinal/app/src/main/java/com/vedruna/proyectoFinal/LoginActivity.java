@@ -30,6 +30,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private List<User> users;
+
+    public static User loggedUser;
     private CRUDInterface crudInterface;
 
     private EditText userName, userPassword;
@@ -101,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
             for (User user : users) {
                 if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                     userFound = true;
+                    loggedUser = user;
                     break;
                 }
             }

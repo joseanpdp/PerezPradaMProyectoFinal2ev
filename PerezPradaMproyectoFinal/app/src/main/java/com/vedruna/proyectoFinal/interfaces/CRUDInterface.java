@@ -1,5 +1,7 @@
 package com.vedruna.proyectoFinal.interfaces;
 
+import com.vedruna.proyectoFinal.dto.PublicationPostDto;
+import com.vedruna.proyectoFinal.dto.PublicationPutDto;
 import com.vedruna.proyectoFinal.model.Publication;
 import com.vedruna.proyectoFinal.model.User;
 
@@ -37,8 +39,8 @@ public interface CRUDInterface {
      * @param publication La publicación a ser creada.
      * @return Una llamada que devuelve la publicación creada.
      */
-    @POST("personajes")
-    Call<Publication> create(@Body Publication publication);
+    @POST("api/publication")
+    Call<Publication> create(@Body PublicationPostDto publicationDto);
 
     /**
      * Actualiza una publicación existente en el sistema.
@@ -47,7 +49,7 @@ public interface CRUDInterface {
      * @return Una llamada que devuelve la publicación actualizada.
      */
     @PUT("api/publication/{id}")
-    Call<Publication> update(@Path("id") long id, @Body Publication publication);
+    Call<Publication> update(@Path("id") long id, @Body PublicationPutDto publicationDto);
 
     /**
      * Elimina una publicación del sistema.
